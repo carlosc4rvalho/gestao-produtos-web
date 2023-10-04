@@ -1,0 +1,177 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  height: 100vh;
+}
+
+input:focus {
+  outline: none;
+}
+
+.sectionCadastro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #0051ff;
+}
+.sectionCadastro .formCadastro {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  gap: 1.2rem;
+}
+.sectionCadastro .formCadastro .headerTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.sectionCadastro .formCadastro .inputContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+.sectionCadastro .formCadastro .inputCadastro {
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  border-radius: 1rem;
+  border: #7e7e7e solid 1px;
+}
+.sectionCadastro .formCadastro .btnCadastrar {
+  background-color: #0051ff;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.sectionCadastro .formCadastro .btnCadastrar:hover {
+  opacity: 0.8;
+}
+
+.sectionResposta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+}
+.sectionResposta .listaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem;
+}
+.sectionResposta .pesquisaContainer {
+  display: flex;
+}
+.sectionResposta .pesquisaContainer .inputPesquisa {
+  padding: 1.5rem;
+  border-radius: 1rem 0 0 1rem;
+  width: 75%;
+  border: none;
+  background-color: #b8dfff;
+  font-size: 1.2rem;
+}
+.sectionResposta .pesquisaContainer .btnPesquisa {
+  background-color: #0051ff;
+  color: #fff;
+  border: none;
+  padding: 1.2rem;
+  border-radius: 0 0.8rem 0.8rem 0;
+  cursor: pointer;
+}
+.sectionResposta .pesquisaContainer .btnPesquisa:hover {
+  opacity: 0.8;
+}
+.sectionResposta .table {
+  background-color: #b8dfff;
+  color: #fff;
+  border-spacing: 0;
+  font-size: 2rem;
+}
+.sectionResposta .table .lineTable {
+  border-radius: 520rem;
+}
+.sectionResposta .table .columnTable {
+  background-color: #0051ff;
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+.sectionResposta .table tr {
+  padding: .8rem;
+  border-radius: 1rem;
+}
+.sectionResposta .table th {
+  padding: 0.3rem;
+}
+.sectionResposta .table td {
+  padding: 0.5rem;
+}
+.sectionResposta .table .inputResultado,
+.sectionResposta .table td {
+  background-color: #b8dfff;
+  color: #929090;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  text-align: center;
+  width: 100px;
+  border: none;
+}
+.sectionResposta .btnContainer {
+  display: flex;
+  gap: 1rem;
+}
+.sectionResposta .btnSalvar {
+  display: none;
+  background-color: #0051ff;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  border: none;
+}
+.sectionResposta .btnSalvar:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.sectionResposta .btnCancelar {
+  background-color: #fff;
+  color: #0051ff;
+  border: #0051ff solid 2px;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.3rem;
+  display: none;
+}
+.sectionResposta .btnCancelar:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.sectionResposta .btnEditar,
+.sectionResposta .btnDeletar {
+  background-color: #0051ff;
+  color: #fff;
+  border-radius: 1rem;
+  border: none;
+  padding: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+.sectionResposta .btnEditar:hover,
+.sectionResposta .btnDeletar:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */

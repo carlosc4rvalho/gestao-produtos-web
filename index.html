@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon"/>
+    <script async src="script.js"></script>
+    <title>Form Cadastro</title>
+  </head>
+
+  <body>
+    <sectionm class="sectionCadastro">
+      <form class="formCadastro">
+        <header class="headerTitle">Dados do produto</header>
+
+        <div class="inputContainer">
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="number"
+            id="id"
+            placeholder="ID"
+          />
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="text"
+            id="codBarras"
+            placeholder="Codigo de barras"
+          />
+        </div>
+
+        <div class="inputContainer">
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="text"
+            id="produto"
+            placeholder="Produto"
+          />
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="text"
+            id="marca"
+            placeholder="Marca"
+          />
+        </div>
+
+        <div class="inputContainer">
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="text"
+            id="modelo"
+            placeholder="Modelo"
+          />
+          <input
+            class="inputCadastro"
+            autocomplete="off"
+            type="text"
+            id="valor"
+            placeholder="valor"
+          />
+        </div>
+
+        <button id="btnCadastrar" class="btnCadastrar">Cadastrar</button>
+      </form>
+    </sectionm>
+
+    <section class="sectionResposta">
+      <main id="listaProdutos" class="listaContainer">
+        <div class="pesquisaContainer">
+          <input
+            class="inputPesquisa"
+            id="inputPesquisa"
+            type="number"
+            placeholder="Pesquisa por ID..."
+          />
+          <button class="btnPesquisa">
+            <!-- vai acabar nem usando esse botão de pesquisa -->
+            <img src="public/pesquisar.svg" alt="icone de pesquisa" />
+          </button>
+        </div>
+
+        <table class="table">
+          <tr class="lineTable">
+            <th style="border-radius: 25px 0 0 0 ;" class="columnTable">Id</th>
+            <th class="columnTable">Cod Barras</th>
+            <th class="columnTable">Produtos</th>
+            <th class="columnTable">Marca</th>
+            <th class="columnTable">Modelo</th>
+            <th class="columnTable">Valor</th>
+            <th class="columnTable">Editar</th>
+            <th style="border-radius: 0 25px 0 0 ;" class="columnTable">Deletar</th>
+          </tr>
+          <tbody id="resultadoTabela"></tbody>
+        </table>
+
+        <div class="btnContainer">
+          <button id="btnSalvar" class="btnSalvar">Salvar</button>
+          <button id="btnCancelar" class="btnCancelar">Cancelar</button>
+        </div>
+      </main>
+    </section>
+  </body>
+</html>

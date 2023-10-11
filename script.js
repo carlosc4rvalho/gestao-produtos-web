@@ -1,40 +1,43 @@
 const init = {
-  btnCadastrar: document.getElementById("btnCadastrar"),
-  btnSalvar: document.getElementById("btnSalvar"),
-  btnCancelar: document.getElementById("btnCancelar"),
-  inputPesquisa: document.getElementById("inputPesquisa"),
+  btnCadastrar: document.getElementById("btnCadastrar"), // Botão de cadastro
+  btnSalvar: document.getElementById("btnSalvar"), // Botão de salvar
+  btnCancelar: document.getElementById("btnCancelar"), // Botão de cancelar
+  inputPesquisa: document.getElementById("inputPesquisa"), // Campo de pesquisa
 };
 
-// Limpa os campos de entrada
+// Função para limpar os campos de entrada
 function limparCampos(dados) {
   for (const campo in dados) {
+    // Limpa o valor do campo de entrada
     document.getElementById(campo).value = "";
   }
 }
 
-// Verifica se algum campo está vazio
+// Função para verificar se algum campo está vazio
 function camposEstaoVazios(dados) {
   for (const campo in dados) {
     if (dados[campo] === "") {
+      // Mostra um alerta se algum campo estiver vazio
       alert("Por favor, preencha todos os campos antes de salvar.");
       return true;
     }
   }
 }
 
-// Bloqueia ou desbloqueia campos de entrada
+// Função para bloquear ou desbloquear campos de entrada
 function bloquearDesbloquearCampos(campos, bloquear) {
   for (const campo in campos) {
     if (campos.hasOwnProperty(campo)) {
       const elemento = campos[campo];
       if (elemento) {
+        // Define o campo de entrada como somente leitura (readOnly)
         elemento.readOnly = bloquear;
       }
     }
   }
 }
 
-// Faz uma requisição HTTP genérica
+// Função genérica para fazer uma requisição HTTP
 async function fazerRequisicaoHTTP(metodo, url, data) {
   try {
     const resposta = await fetch(url, {
@@ -46,55 +49,63 @@ async function fazerRequisicaoHTTP(metodo, url, data) {
     });
 
     if (resposta.status === 200) {
+      // Se a resposta for bem-sucedida, retorna os dados da resposta
       const respostaData = await resposta.json();
       return respostaData;
     }
   } catch (error) {
+    // Em caso de erro na requisição, exibe uma mensagem de erro
     console.error("Erro na requisição:", error);
   }
 }
 
-// Faz uma requisição para obter todos os produtos
+// Função para fazer uma requisição e obter todos os produtos
 async function fazerRequisicao() {
   try {
     const resposta = await fetch(
       "http://reserva.laboratorio.app.br:10100/produtos"
     );
     if (resposta.status === 200) {
+      // Se a resposta for bem-sucedida, lê os dados e exibe na tabela
       const data = await resposta.json();
       lerTodos(data);
     }
   } catch (error) {
+    // Em caso de erro na requisição, exibe uma mensagem de erro
     console.error("Erro na requisição:", error);
   }
 }
 
-// Faz uma requisição para obter um produto por ID
+// Função para fazer uma requisição e obter um produto por ID
 async function fazerRequisicaoPorID(id) {
   try {
     const resposta = await fetch(
       `http://reserva.laboratorio.app.br:10100/produto/${id}`
     );
     if (resposta.status === 200) {
+      // Se a resposta for bem-sucedida, lê os dados e exibe na tabela
       const data = await resposta.json();
       lerPorId(data);
     } else if (resposta.status === 404) {
+      // Se o ID não for encontrado na API, exibe uma mensagem de aviso
       console.log("ID não encontrado na API");
     }
   } catch (error) {
+    // Em caso de erro na requisição, exibe uma mensagem de erro
     console.error("Erro na requisição:", error);
   }
 }
 
-// Lê e exibe todos os produtos na tabela
+// Função para ler e exibir todos os produtos na tabela
 function lerTodos(data) {
   const tabela = document.getElementById("resultadoTabela");
   tabela.innerHTML = "";
 
-  // Ordenação por meio do ID (menor ao maior)
+  // Ordena os dados por ID (do menor ao maior)
   data.sort((a, b) => a.id - b.id);
 
   data.forEach(function (item) {
+    // Cria linhas e células na tabela para exibir os produtos
     let row = tabela.insertRow();
     let cell1 = row.insertCell(0);
     let cell2 = row.insertCell(1);
@@ -109,7 +120,7 @@ function lerTodos(data) {
     cell1.innerHTML = `<input type="text" class="inputResultado" id="id_${item.id}" value="${item.id}" readonly>`;
     cell2.innerHTML = `<input type="text" class="inputResultado" id="codBarras_${item.id}" value="${item.codBarras}" readonly>`;
     cell3.innerHTML = `<input type="text" class="inputResultado" id="produto_${item.id}" value="${item.produto}" readonly>`;
-    cell4.innerHTML = `<input type="text" class="inputResultado" id="marca_${item.id}" value="${item.marca}" readonly>`;
+    cell4.innerHTML = `<input type:text" class="inputResultado" id="marca_${item.id}" value="${item.marca}" readonly>`;
     cell5.innerHTML = `<input type="text" class="inputResultado" id="modelo_${item.id}" value="${item.modelo}" readonly>`;
     cell6.innerHTML = `<input type="text" class="inputResultado" id="valor_${item.id}" value="${item.valor}" readonly>`;
     cell7.innerHTML = `<button id="editar" class="btnEditar" onclick="editarItem(${item.id})">Editar</button>`;
@@ -117,7 +128,7 @@ function lerTodos(data) {
   });
 }
 
-// Lê e exibe um produto por ID na tabela
+// Função para ler e exibir um produto por ID na tabela
 function lerPorId(item) {
   const tabela = document.getElementById("resultadoTabela");
   tabela.innerHTML = "";
@@ -143,8 +154,9 @@ function lerPorId(item) {
   cell8.innerHTML = `<button id="deletar" class="btnDeletar" onclick="deletar(${item.id})">Deletar</button>`;
 }
 
-// Cadastra um novo produto
+// Função para cadastrar um novo produto
 async function cadastrar() {
+  // Obtém os dados do produto a ser cadastrado
   const dadosProduto = {
     id: parseInt(document.getElementById("id").value),
     codBarras: document.getElementById("codBarras").value,
@@ -156,49 +168,56 @@ async function cadastrar() {
 
   if (!camposEstaoVazios(dadosProduto)) {
     try {
+      // Faz uma requisição HTTP POST para cadastrar o produto
       await fazerRequisicaoHTTP(
         "POST",
         "http://reserva.laboratorio.app.br:10100/produto",
         dadosProduto
       );
+      // Atualiza a tabela e limpa os campos de entrada
       fazerRequisicao();
       limparCampos(dadosProduto);
     } catch (error) {
+      // Em caso de erro no cadastro, exibe uma mensagem de erro
       console.error("Erro ao cadastrar:", error);
     }
   }
 }
 
-// Deleta um produto pelo ID
+// Função para deletar um produto pelo ID
 async function deletar(id) {
   try {
+    // Faz uma requisição HTTP DELETE para deletar o produto
     await fazerRequisicaoHTTP(
       "DELETE",
       `http://reserva.laboratorio.app.br:10100/produto/${id}`
     );
+    // Atualiza a tabela após a exclusão
     fazerRequisicao();
   } catch (error) {
+    // Em caso de erro na exclusão, exibe uma mensagem de erro
     console.error("Erro ao deletar:", error);
   }
 }
 
-
-// Envia as alterações de um produto
+// Função para enviar as alterações de um produto
 async function enviarEdicao(id, novoProduto) {
   try {
+    // Faz uma requisição HTTP PUT para enviar as alterações
     await fazerRequisicaoHTTP(
       "PUT",
       `http://reserva.laboratorio.app.br:10100/produto/${id}`,
       novoProduto
     );
+    // Atualiza a tabela após a edição
     fazerRequisicao();
   } catch (error) {
+    // Em caso de erro na edição, exibe uma mensagem de erro
     console.error("Erro ao enviar edição:", error);
   }
 }
 
-
-// Edita um produto
+// Função para editar um produto
 function editarItem(id) {
   init.btnSalvar.style.display = "block";
   init.btnCancelar.style.display = "block";
@@ -224,6 +243,7 @@ function editarItem(id) {
   bloquearDesbloquearCampos(camposEditar, false);
 
   init.btnSalvar.addEventListener("click", async () => {
+    // Obtém os novos dados do produto a ser editado
     const novosDadosProduto = {
       id: camposEditar.id.value,
       codBarras: camposEditar.codBarras.value,
@@ -234,6 +254,7 @@ function editarItem(id) {
     };
 
     if (!camposEstaoVazios(novosDadosProduto)) {
+      // Envia as alterações do produto
       await enviarEdicao(id, novosDadosProduto);
       bloquearDesbloquearCampos(camposEditar, true);
       init.btnSalvar.style.display = "none";
@@ -242,7 +263,8 @@ function editarItem(id) {
   });
 
   init.btnCancelar.addEventListener("click", () => {
-    camposEditar.id.value= valoresOriginais.id;
+    // Restaura os valores originais dos campos de edição
+    camposEditar.id.value = valoresOriginais.id;
     camposEditar.codBarras.value = valoresOriginais.codBarras;
     camposEditar.produto.value = valoresOriginais.produto;
     camposEditar.marca.value = valoresOriginais.marca;
@@ -256,13 +278,14 @@ function editarItem(id) {
   });
 }
 
-// Adicionando eventos aos botões
+// Adicionando eventos aos botões e campos
 init.btnCadastrar.addEventListener("click", cadastrar);
 
 init.inputPesquisa.addEventListener("input", () => {
   const idPesquisa = init.inputPesquisa.value;
+  // Realiza uma pesquisa por ID se o campo de pesquisa não estiver vazio
   idPesquisa !== "" ? fazerRequisicaoPorID(idPesquisa) : fazerRequisicao();
 });
 
-// Iniciando a primeira requisição
+// Iniciando a primeira requisição ao carregar a página
 fazerRequisicao();

@@ -1,3 +1,4 @@
+// O objeto 'init' é utilizado para armazenar referências a elementos do DOM
 const init = {
   btnCadastrar: document.getElementById("btnCadastrar"), // Botão de cadastro
   btnSalvar: document.getElementById("btnSalvar"), // Botão de salvar
